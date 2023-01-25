@@ -14,11 +14,10 @@ class TraceAll(BaseAnalysis):
     
     def log(self, iid: int, *args, **kwargs):
         res = ''
-        # for arg in args:
-        #     if 'danger_of_recursion' in kwargs:
-        #         res += ' ' + str(hex(id(arg)))
-        #     else:
-        #         res += ' ' + str(arg)
+        for arg in args:
+            res += ' ' + str(arg)
+        for kwarg in kwargs:
+            res += ' ' + str(kwarg)
         logging.info(str(iid) + ': ' + res[:80])
 
     # Literals
