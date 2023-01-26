@@ -970,9 +970,7 @@ class TraceAll(BaseAnalysis):
     def begin_execution(self) -> None:
         """Hook for the start of execution."""
         self.log(-1, 'Execution started')
-        self.log("dyn_ast", dyn_ast)
     
     def end_execution(self) -> None:
         """Hook for the end of execution."""
         self.log(-1, 'Execution ended')
-        self.log("dyn_ast", dyn_ast)
