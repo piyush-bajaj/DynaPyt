@@ -40,6 +40,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the integer literal.
         """
         self.log(iid, '    Integer', 'value:', val)
+        self.log("dyn_ast", dyn_ast)
     
     def _float(self, dyn_ast: str, iid: int, val: Any) -> Any:
         """Hook for floating point literals.
@@ -59,6 +60,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the float literal.
         """
         self.log(iid, '    Float', 'value:', val)
+        self.log("dyn_ast", dyn_ast)
     
     def imaginary(self, dyn_ast: str, iid: int, val: Any) -> Any:
         """Hook for imaginary number literals.
@@ -78,6 +80,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the imaginary number literal.
         """
         self.log(iid, '    Imaginary', 'value:', val)
+        self.log("dyn_ast", dyn_ast)
     
     def string(self, dyn_ast: str, iid: int, val: Any) -> Any:
         """Hook for string literals.
@@ -97,6 +100,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the string literal.
         """
         self.log(iid, '    String', 'value:', val)
+        self.log("dyn_ast", dyn_ast)
     
     def boolean(self, dyn_ast: str, iid: int, val: Any) -> Any:
         """Hook for boolean literals.
@@ -116,6 +120,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the boolean literal.
         """
         self.log(iid, '    Boolean', 'value:', val)
+        self.log("dyn_ast", dyn_ast)
     
     def literal(self, dyn_ast: str, iid: int, val: Any) -> Any:
         """Hook for all literals.
@@ -135,6 +140,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the literal.
         """
         self.log(iid, 'Literal   ', 'value:', val)
+        self.log("dyn_ast", dyn_ast)
     
     def dictionary(self, dyn_ast: str, iid: int, items: List[Any], value: Dict) -> Dict:
         """Hook for a dictionary definition.
@@ -158,6 +164,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the dictionary.
         """
         self.log(iid, 'Dictionary', 'items:', items)
+        self.log("dyn_ast", dyn_ast)
     
     def _list(self, dyn_ast: str, iid: int, value: List) -> List:
         """Hook for a list definition.
@@ -179,6 +186,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the list.
         """
         self.log(iid, 'List', value)
+        self.log("dyn_ast", dyn_ast)
     
     def _tuple(self, dyn_ast: str, iid: int, items: List[Any], value: tuple) -> tuple:
         """Hook for a tuple.
@@ -202,6 +210,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the tuple.
         """
         self.log(iid, 'Tuple', 'items:', items)
+        self.log("dyn_ast", dyn_ast)
     
     # Operations
 
@@ -252,51 +261,67 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the result of the operation.
         """
         self.log(iid, 'Binary Operation', left, op, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def add(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def bit_and(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def bit_or(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def bit_xor(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def divide(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def floor_divide(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def left_shift(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def right_shift(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def matrix_multiply(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def modulo(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def multiply(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def power(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def subtract(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def _and(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def _or(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Binary Operation', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
 
     def unary_operation(self, dyn_ast: str, iid: int, opr: Any, arg: Any, result: Any) -> Any:
         """Hook for any unary operation.
@@ -320,18 +345,23 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the result of the operation.
         """
         self.log(iid, 'Unary Operation', arg, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def bit_invert(self, dyn_ast: str, iid: int, arg: Any, result: Any) -> Any:
         self.log(iid, 'Unary Operation', arg, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def minus(self, dyn_ast: str, iid: int, arg: Any, result: Any) -> Any:
         self.log(iid, 'Unary Operation', arg, '->', result)
+        self.log("dyn_ast", dyn_ast)
 
     def _not(self, dyn_ast: str, iid: int, arg: Any, result: Any) -> Any:
         self.log(iid, 'Unary Operation', arg, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def plus(self, dyn_ast: str, iid: int, arg: Any, result: Any) -> Any:
         self.log(iid, 'Unary Operation', arg, '->', result)
+        self.log("dyn_ast", dyn_ast)
 
     def comparison(self, dyn_ast: str, iid: int, op: str, left: Any, right: Any, result: Any) -> Any:
         """Hook for the comparison operation.
@@ -357,36 +387,46 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the result of the operation.
         """
         self.log(iid, 'Comparison', left, op, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def equal(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def greater_than(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def greater_than_equal(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def _in(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
     
     def _is(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
 
     def less_than(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
 
     def less_than_equal(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
 
     def not_equal(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
 
     def is_not(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
 
     def not_in(self, dyn_ast: str, iid: int, left: Any, right: Any, result: Any) -> Any:
         self.log(iid, 'Comparison', left, right, '->', result)
+        self.log("dyn_ast", dyn_ast)
 
 
     # Memory access
@@ -409,12 +449,15 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the returned value.
         """
         self.log(iid, 'Accessing')
+        self.log("dyn_ast", dyn_ast)
     
     def read(self, dyn_ast: str, iid: int, val: Any) -> Any:
         self.log(iid, ' Reading')
+        self.log("dyn_ast", dyn_ast)
     
     def read_identifier(self, dyn_ast: str, iid: int, val: Any) -> Any:
         self.log(iid, '    Reading')
+        self.log("dyn_ast", dyn_ast)
 
     def write(self, dyn_ast: str, iid: int, old_vals: List[Callable], new_val: Any) -> Any:
         """Hook for writes.
@@ -439,6 +482,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the returned value.
         """
         self.log(iid, '    Writing')
+        self.log("dyn_ast", dyn_ast)
 
     def delete(self, dyn_ast: str, iid: int, val: Any) -> Optional[bool]:
         """Hook for deletes.
@@ -458,6 +502,7 @@ class TraceAll(BaseAnalysis):
             If True cancels the delete.
         """
         self.log(iid, '    Deleting')
+        self.log("dyn_ast", dyn_ast)
 
     def read_attribute(self, dyn_ast: str, iid: int, base: Any, name: str, val: Any) -> Any:
         """Hook for reading an object attribute.
@@ -482,6 +527,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the returned value.
         """
         self.log(iid, 'Attribute', name)
+        self.log("dyn_ast", dyn_ast)
     
     def read_subscript(self, dyn_ast: str, iid: int, base: Any, sl: List[Union[int, Tuple]], val: Any) -> Any:
         """Hook for reading a subscript, also known as a slice.
@@ -506,6 +552,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the returned value.
         """
         self.log(iid, 'Slice', sl)
+        self.log("dyn_ast", dyn_ast)
 
     # Instrumented function
 
@@ -530,6 +577,7 @@ class TraceAll(BaseAnalysis):
             return
         if (not is_lambda) and (get_node_by_location(ast, iids.iid_to_location[iid], m.FunctionDef()).name in ['__str__', '__repr__']):
             self.log(iid, 'Entered function', danger_of_recursion=True)
+            self.log("dyn_ast", dyn_ast)
 
     def function_exit(self, dyn_ast: str, iid: int, result: Any) -> Any:
         """Hook for exiting an instrumented function.
@@ -549,12 +597,15 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the returned value.
         """
         self.log(iid, 'Exiting function')
-    
+        self.log("dyn_ast", dyn_ast)
+
     def _return(self, dyn_ast: str, iid: int, value: Any) -> Any:
         self.log(iid, '   Returning', value)
+        self.log("dyn_ast", dyn_ast)
 
     def _yield(self, dyn_ast: str, iid: int, value: Any) -> Any:
         self.log(iid, '   Yielding', value)
+        self.log("dyn_ast", dyn_ast)
 
     # Function Call
 
@@ -573,6 +624,7 @@ class TraceAll(BaseAnalysis):
             The keyword arguments passed to the function.
         """
         self.log(iid, 'Before function call')
+        self.log("dyn_ast", dyn_ast)
     
     def post_call(self, dyn_ast: str, iid: int, val: Any, pos_args: Tuple, kw_args: Dict) -> Any:
         """Hook called after a function call.
@@ -596,6 +648,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the returned value.
         """
         self.log(iid, 'After function call')
+        self.log("dyn_ast", dyn_ast)
 
     # Statements
     
@@ -624,45 +677,58 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the result.
         """
         self.log(iid, 'Augmented assignment', left, op, right)
+        self.log("dyn_ast", dyn_ast)
     
     def add_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def bit_and_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def bit_or_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def bit_xor_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def divide_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def floor_divide_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def left_shift_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def matrix_multiply_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def modulo_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
     
     def multiply_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def power_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def right_shift_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
     
     def subtract_assign(self, dyn_ast: str, iid: int, left: Any, right: Any) -> Any:
         self.log(iid, 'Augmented assignment', left, right)
+        self.log("dyn_ast", dyn_ast)
 
     def _raise(self, dyn_ast: str, iid: int, exc: Exception, cause: Any) -> Optional[Exception]:
         """Hook for instrumented raise statement.
@@ -684,6 +750,7 @@ class TraceAll(BaseAnalysis):
             If provided, changes the exception raised.
         """
         self.log(iid, 'Exception raised', exc, 'because of', cause)
+        self.log("dyn_ast", dyn_ast)
 
     def _assert(self, dyn_ast: str, iid: int, condition: bool, message: str) -> Optional[bool]:
         """Hook for assert statement.
@@ -705,6 +772,7 @@ class TraceAll(BaseAnalysis):
             If provided, changes the condition of assert.
         """
         self.log(iid, 'Asserting', condition, 'with message', message)
+        self.log("dyn_ast", dyn_ast)
 
     # Control flow
 
@@ -726,6 +794,7 @@ class TraceAll(BaseAnalysis):
             If provided, changes the condition of the control flow.
         """
         self.log(iid, 'Control-flow enter', 'with condition', cond_value)
+        self.log("dyn_ast", dyn_ast)
     
     def exit_control_flow(self, dyn_ast: str, iid: int) -> None:
         """Hook called when exiting a control flow branch.
@@ -738,6 +807,7 @@ class TraceAll(BaseAnalysis):
             Unique ID of the syntax tree node.
         """
         self.log(iid, 'Control-flow exit')
+        self.log("dyn_ast", dyn_ast)
 
     def enter_if(self, dyn_ast: str, iid: int, cond_value: bool) -> Optional[bool]:
         """Hook called when entering an if conditional.
@@ -757,6 +827,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the condition (which may change the branch outcome).
         """
         self.log(iid, '   If', cond_value)
+        self.log("dyn_ast", dyn_ast)
 
     def enter_for(self, dyn_ast: str, iid: int, next_value: Any) -> Optional[Any]:
         """Hook for entering a single iteration of a for loop.
@@ -776,6 +847,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the value of the iterator.
         """
         self.log(iid, '   For', next_value)
+        self.log("dyn_ast", dyn_ast)
 
     def enter_while(self, dyn_ast: str, iid: int, cond_value: bool) -> Optional[bool]:
         """Hook for entering the next iteration of a while loop.
@@ -795,6 +867,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the condition.
         """
         self.log(iid, '   While', cond_value)
+        self.log("dyn_ast", dyn_ast)
 
     def _break(self, dyn_ast: str, iid: int) -> Optional[bool]:
         """Hook for break statement.
@@ -812,6 +885,7 @@ class TraceAll(BaseAnalysis):
             If False, cancels the break.
         """
         self.log(iid, 'Break')
+        self.log("dyn_ast", dyn_ast)
 
     def _continue(self, dyn_ast: str, iid: int) -> Optional[bool]:
         """Hook for continue statement.
@@ -829,6 +903,7 @@ class TraceAll(BaseAnalysis):
             If False, cancels continue.
         """
         self.log(iid, 'Continue')
+        self.log("dyn_ast", dyn_ast)
 
     def _try(self, dyn_ast: str, iid: int) -> None:
         """Hook for entering a try block.
@@ -841,6 +916,7 @@ class TraceAll(BaseAnalysis):
             Unique ID of the syntax tree node.
         """
         self.log(iid, 'Entered try')
+        self.log("dyn_ast", dyn_ast)
 
     def exception(self, dyn_ast: str, iid: int, exceptions: List[Exception], caught: Exception) -> Optional[Exception]:
         """Hook for entering an except block.
@@ -862,6 +938,7 @@ class TraceAll(BaseAnalysis):
             If provided, overwrites the exception caught.
         """
         self.log(iid, 'Caught', caught, 'from', exceptions)
+        self.log("dyn_ast", dyn_ast)
 
     # Top level
 
@@ -888,11 +965,14 @@ class TraceAll(BaseAnalysis):
             The stack trace of the exception.
         """
         self.log(-1, 'Uncaught exception', exc, stack_trace)
+        self.log("dyn_ast", dyn_ast)
     
     def begin_execution(self) -> None:
         """Hook for the start of execution."""
         self.log(-1, 'Execution started')
+        self.log("dyn_ast", dyn_ast)
     
     def end_execution(self) -> None:
         """Hook for the end of execution."""
         self.log(-1, 'Execution ended')
+        self.log("dyn_ast", dyn_ast)
