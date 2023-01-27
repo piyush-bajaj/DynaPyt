@@ -25,11 +25,11 @@ class LoopingAnalysis(BaseAnalysis):
         ast, iids = self._get_ast(dyn_ast)
         node = get_node_by_location(ast, iids.iid_to_location[iid], m.For())
         condition = cst.parse_module('').code_for_node(node)
-        logging.info('Entering for loop : ', condition)
+        logging.info('Entering for loop : \n{}'.format(condition))
 
     def enter_while(self, dyn_ast: str, iid: int, cond_value: bool) -> Optional[bool]:
         self.while_loop_count += 1
         ast, iids = self._get_ast(dyn_ast)
         node = get_node_by_location(ast, iids.iid_to_location[iid], m.While())
         condition = cst.parse_module('').code_for_node(node)
-        logging.info('Entering while loop : ', condition)
+        logging.info('Entering while loop : \n{}'.format(condition))
