@@ -1046,8 +1046,6 @@ class TraceAll(BaseAnalysis):
             The stack trace of the exception.
         """
         self.log(-1, 'Uncaught exception', exc, stack_trace)
-        self.log("dyn_ast", dyn_ast)
-        self.log(self.iid_to_location(dyn_ast, iid))
     
     def begin_execution(self) -> None:
         """Hook for the start of execution."""
