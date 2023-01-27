@@ -23,10 +23,9 @@ class LoopingAnalysis(BaseAnalysis):
     def enter_for(self, dyn_ast: str, iid: int, next_value: Any) -> Optional[Any]:
         self.for_loop_count += 1
         ast, iids = self._get_ast(dyn_ast)
-        target = get_node_by_location(ast, iids.iid_to_location[iid], m.For().target)
-        iter = get_node_by_location(ast, iids.iid_to_location[iid], m.For().iter)
-        # loop_string = cst.parse_module('').code_for_node(node).split(':')[0]
-        loop_string = 'for {} in {}'.format(target, iter)
+        node = get_node_by_location(ast, iids.iid_to_location[iid], m.For())
+        loop_string = cst.parse_module('').code_for_node(node).split(':')[0]
+        # loop_string = 'for {} in {}'.format(target, iter)
         logging.info('Entering for loop : \n{}'.format(loop_string))
 
     def enter_while(self, dyn_ast: str, iid: int, cond_value: bool) -> Optional[bool]:
