@@ -17,8 +17,8 @@ class LoopingAnalysis(BaseAnalysis):
         logging.info('Starting Looping Analysis')
         
     def end_execution(self) -> None:
-        logging.info('Number of for loops : ', self.for_loop_count)
-        logging.info('Number of while loops : ', self.while_loop_count)
+        logging.info('Number of for loops : {}'.format(self.for_loop_count))
+        logging.info('Number of while loops : {}'.format(self.while_loop_count))
         
     def enter_for(self, dyn_ast: str, iid: int, next_value: Any) -> Optional[Any]:
         self.for_loop_count += 1
