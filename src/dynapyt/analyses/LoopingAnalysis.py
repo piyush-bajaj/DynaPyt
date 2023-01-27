@@ -1,0 +1,35 @@
+import logging
+from .BaseAnalysis import BaseAnalysis
+import libcst as cst
+import libcst.matchers as m
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from ..utils.nodeLocator import get_node_by_location
+
+class LoopingAnalysis(BaseAnalysis):
+    
+    def __init__(self) -> None:
+        super().__init__()
+        logging.basicConfig(filename='output.log', format='%(message)s', level=logging.INFO)
+        self.for_loop_count = 0
+        self.while_loop_count = 0
+        
+    def begin_execution(self) -> None:
+        logging.info('Starting Looping Analysis')
+        
+    def end_execution(self) -> None:
+        logging.info('Number of for loops : ', self.for_loop_count)
+        logging.info('Number of while loops : ', self.while_loop_count)
+        
+    def enter_for(self, dyn_ast: str, iid: int, next_value: Any) -> Optional[Any]:
+        self.for_loop_count += 1
+        ast, iids = self._get_ast(dyn_ast)
+        node = get_node_by_location(ast, iids.iid_to_location[iid], m.For())
+        condition = cst.parse_module('').code_for_node(node)
+        logging.info('Entering for loop : ', condition)
+
+    def enter_while(self, dyn_ast: str, iid: int, cond_value: bool) -> Optional[bool]:
+        self.while_loop_count += 1
+        ast, iids = self._get_ast(dyn_ast)
+        node = get_node_by_location(ast, iids.iid_to_location[iid], m.While())
+        condition = cst.parse_module('').code_for_node(node)
+        logging.info('Entering while loop : ', condition)
