@@ -17,6 +17,7 @@ class LoopingAnalysis(BaseAnalysis):
         logging.info('\tStarting Looping Analysis\t')
         
     def end_execution(self) -> None:
+        logging.info('Donw with the analysis')
         for key, value in self.for_loop_count:
             logging.info('Executed condition \t{}\t in file \t{}\t \t{}\t times'.format(key[2], key[1], value))
         for key, value in self.while_loop_count:
