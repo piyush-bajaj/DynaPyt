@@ -9,7 +9,7 @@ class LoopingAnalysis(BaseAnalysis):
     
     def __init__(self) -> None:
         super().__init__()
-        logging.basicConfig(filename='output.log', format='%(message)s', level=logging.INFO)
+        logging.basicConfig(format='%(message)s', level=logging.INFO)
         self.for_loop_count = dict()
         self.while_loop_count = dict()
 
