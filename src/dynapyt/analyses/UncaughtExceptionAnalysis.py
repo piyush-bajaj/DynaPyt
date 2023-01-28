@@ -6,7 +6,7 @@ class UncaughtExceptionAnalysis(BaseAnalysis):
     
     def __init__(self) -> None:
         super().__init__()
-        logging.basicConfig(filename="output.log", format="%(message)s", level=logging.INFO)
+        logging.basicConfig(format="%(message)s", level=logging.INFO)
         self.count = 0
         
     def uncaught_exception(self, exc: Exception, stack_trace: TracebackType) -> None:
