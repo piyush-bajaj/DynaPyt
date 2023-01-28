@@ -26,8 +26,8 @@ class LoopingAnalysis(BaseAnalysis):
         ast, iids = self._get_ast(dyn_ast)
         node = get_node_by_location(ast, iids.iid_to_location[iid], m.For())        
         loc_file = self.iid_to_location(dyn_ast, iid)
-        # loop_string = cst.parse_module('').code_for_node(node).split(':')[0]
-        loop_string = 'for {} in {}'.format(node.target, node.iter)
+        loop_string = cst.parse_module('').code_for_node(node).split(':')[0]
+        # loop_string = 'for {} in {}'.format(node.target, node.iter)
         self.for_loop_count[(iid, loc_file[0], loop_string)] = self.for_loop_count.get((iid, loc_file[0], loop_string), 0) + 1
         logging.debug('Entering for loop : \n{}'.format(loop_string))
 
@@ -35,7 +35,7 @@ class LoopingAnalysis(BaseAnalysis):
         ast, iids = self._get_ast(dyn_ast)
         node = get_node_by_location(ast, iids.iid_to_location[iid], m.While())
         loc_file = self.iid_to_location(dyn_ast, iid)
-        #loop_string = cst.parse_module('').code_for_node(node).split(':')[0]
-        loop_string = 'while {}'.format(node.test)
+        loop_string = cst.parse_module('').code_for_node(node).split(':')[0]
+        # loop_string = 'while {}'.format(node.test)
         self.while_loop_count[(iid, loc_file[0], loop_string, cond_value)] = self.for_loop_count.get((iid, loc_file[0], loop_string, cond_value), 0) + 1
         logging.debug('Entering while loop : \n{}'.format(loop_string))
