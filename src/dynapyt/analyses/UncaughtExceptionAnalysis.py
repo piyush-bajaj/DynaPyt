@@ -20,6 +20,6 @@ class UncaughtExceptionAnalysis(BaseAnalysis):
         
     def end_execution(self) -> None:
         if(self.count < 1):
-            logging.info('There are no uncaught exception')
+            logging.info('\nThere are no uncaught exception')
         else:
-            logging.info('There are {} uncaught exceptions!\nPlease see the output.log for more info'.format(self.count))
+            logging.info('\nThere are {} uncaught exceptions!\nPlease see the output.log for more info'.format(self.count))
