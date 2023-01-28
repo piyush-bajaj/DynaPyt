@@ -18,9 +18,9 @@ class LoopingAnalysis(BaseAnalysis):
         
     def end_execution(self) -> None:
         for key, value in self.for_loop_count.items():
-            logging.info('Executed condition \t{}\t in file \t{}\t line number {} \t{}\t times'.format(key[3], key[1], key[2], value))
+            logging.info('\nExecuted condition \t{}\t in file \t{}\t line number {} \t{}\t times'.format(key[3], key[1], key[2], value))
         for key, value in self.while_loop_count.items():
-            logging.info('Executed condition \t{}\t in file \t{}\t line number {} \t{}\t times with condition value as {}'.format(key[3], key[1], key[2], value, key[4]))
+            logging.info('\nExecuted condition \t{}\t in file \t{}\t line number {} \t{}\t times with condition value as {}'.format(key[3], key[1], key[2], value, key[4]))
         
     def enter_for(self, dyn_ast: str, iid: int, next_value: Any) -> Optional[Any]:
         ast, iids = self._get_ast(dyn_ast)
