@@ -27,14 +27,16 @@ class LoopingAnalysis(BaseAnalysis):
         node = get_node_by_location(ast, iids.iid_to_location[iid], m.For())        
         loc_file = self.iid_to_location(dyn_ast, iid)
         #loop_string = cst.parse_module('').code_for_node(node).split(':')[0]
-        body = node.body
-        body_code = cst.Module([body]).code
-        node_code = cst.Module([node]).code
-        node_code.replace(body_code, "")
+        
+        target = node.target
+        iter = node.iter
+        target_code = cst.Module([target]).code
+        iter_code = cst.Module([iter]).code
+        #node_code.replace(body_code, "")
 
-        # loop_string = 'for {} in {}'.format(node.target, node.iter)
-        self.for_loop_count[(iid, loc_file[0], loc_file[1], node_code)] = self.for_loop_count.get((iid, loc_file[0], loc_file[1], node_code), 0) + 1
-        logging.debug('Entering for loop : \n{}'.format(node_code))
+        loop_string = 'for {} in {}'.format(target_code, iter_code)
+        self.for_loop_count[(iid, loc_file[0], loc_file[1], loop_string)] = self.for_loop_count.get((iid, loc_file[0], loc_file[1], loop_string), 0) + 1
+        logging.debug('Entering for loop : \n{}'.format(loop_string))
 
     def enter_while(self, dyn_ast: str, iid: int, cond_value: bool) -> Optional[bool]:
         ast, iids = self._get_ast(dyn_ast)
