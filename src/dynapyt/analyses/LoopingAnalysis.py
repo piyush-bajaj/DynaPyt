@@ -2,7 +2,7 @@ import logging
 from .BaseAnalysis import BaseAnalysis
 import libcst as cst
 import libcst.matchers as m
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union, Iterable
 from ..utils.nodeLocator import get_node_by_location
 
 class LoopingAnalysis(BaseAnalysis):
@@ -22,7 +22,7 @@ class LoopingAnalysis(BaseAnalysis):
         for key, value in self.while_loop_count.items():
             logging.info('\nExecuted condition \t{}\t in file \t{}\t line number {} \t{}\t times with condition value as {}'.format(key[3], key[1], key[2], value, key[4]))
         
-    def enter_for(self, dyn_ast: str, iid: int, next_value: Any) -> Optional[Any]:
+    def enter_for(self, dyn_ast: str, iid: int, next_value: Any, iterable: Iterable) -> Optional[Any]:
         ast, iids = self._get_ast(dyn_ast)
         node = get_node_by_location(ast, iids.iid_to_location[iid], m.For())        
         loc_file = self.iid_to_location(dyn_ast, iid)
