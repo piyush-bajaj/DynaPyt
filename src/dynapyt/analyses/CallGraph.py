@@ -12,6 +12,9 @@ class CallGraph(BaseAnalysis):
         ast, iids = self._get_ast(dyn_ast)
         caller = get_parent_by_type(ast, iids.iid_to_location[iid], m.FunctionDef())
         callee = get_node_by_location(ast, iids.iid_to_location[iid], m.Call())
+        print("caller:", caller)
+        print("callee:", callee)
+        print("graph", self.graph)
         if caller is None:
             f = 'root module'
         else:
