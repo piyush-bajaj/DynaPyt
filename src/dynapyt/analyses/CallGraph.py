@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Tuple, Dict
 import libcst.matchers as m
 from .BaseAnalysis import BaseAnalysis
 from ..utils.nodeLocator import get_node_by_location, get_parent_by_type
