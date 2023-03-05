@@ -10,7 +10,7 @@ class CallGraph(BaseAnalysis):
         logging.basicConfig(format='%(message)s', level=logging.INFO)
         self.graph = set()
 
-    def pre_call(self, dyn_ast: str, iid: int, pos_args: Tuple, kw_args: Dict, function: Callable):
+    def pre_call(self, dyn_ast: str, iid: int, function: Callable, pos_args: Tuple, kw_args: Dict):
         ast, iids = self._get_ast(dyn_ast)
         caller = get_parent_by_type(ast, iids.iid_to_location[iid], m.FunctionDef())
         callee = get_node_by_location(ast, iids.iid_to_location[iid], m.Call())
