@@ -1,5 +1,6 @@
 from typing import Callable, Tuple, Dict
 import logging
+import libcst as cst
 import libcst.matchers as m
 from .BaseAnalysis import BaseAnalysis
 from ..utils.nodeLocator import get_node_by_location, get_parent_by_type
@@ -28,4 +29,8 @@ class CallGraph(BaseAnalysis):
         logging.info('New Graph : {}'.format(self.graph))
     
     def end_execution(self):
-        print(self.graph)
+        for element in self.graph:
+            func_name = element[0]
+            val = cst.Module([element[1]]).code
+            print("func_name", func_name)
+            print("val", val)
