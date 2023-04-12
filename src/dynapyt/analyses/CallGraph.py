@@ -97,12 +97,7 @@ class CallGraph(BaseAnalysis):
             "Caller" : self.callers,
             "Callee" : self.callees
         }
-        logging.info("graph")
-        logging.info(json.dumps(self.graph))
-        logging.info("callers")
-        logging.info(json.dumps(self.callers))
-        logging.info("callees")
-        logging.info(json.dumps(self.callees))
+        logging.info(json.dumps(final_json))
         # for key, value in self.graph.items():
         #     logging.info("{} : {}".format(key, value))
         # logging.info(self.graph)
