@@ -41,10 +41,11 @@ class CallGraph(BaseAnalysis):
                 self.graph[f] = temp
                 #add callee code
                 temp_callees = self.callees[f]
-                if hasattr(function, "__code__") : 
-                    temp_callees.append(function.__code__)
+                if hasattr(function, "__code__") :
+                    code = function.__code__
+                    temp_callees.append(code)
                 else:
-                    temp_callees.append(function.__qualname__)
+                    temp_callees.append(callee)
                 self.callees[f] = temp_callees
             # self.graph[f] = [self.graph[f], callee]
             # self.graph[f] = [x for x in self.graph[f]]
@@ -57,13 +58,14 @@ class CallGraph(BaseAnalysis):
             else:
                 self.callers[f] = [cst.Module([caller]).code]
                 
-            logging.info(hasattr(function, "__code__"))
+            # logging.info(hasattr(function, "__code__"))
             if hasattr(function, "__code__"):
-                logging.info("func code")
-                self.callees[f] = [function.__code__]
+                # logging.info("func code")
+                code = function.__code__
+                self.callees[f] = [code]
             else:
-                logging.info("func qualname")
-                self.callees[f] = [function.__qualname__]
+                # logging.info("func qualname")
+                self.callees[f] = [callee]
         # callee = get_node_by_location(ast, iids.iid_to_location[iid], m.Call())
         # if caller is None:
         #     f = 'root module'
