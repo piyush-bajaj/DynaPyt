@@ -42,9 +42,9 @@ class CallGraph(BaseAnalysis):
                 #add callee code
                 temp_callees = self.callees[f]
                 if hasattr(function, "__code__") : 
-                    temp_callees = [function.__code__]
+                    temp_callees.append(function.__code__)
                 else:
-                    temp_callees = [function.__qualname__]
+                    temp_callees.append(function.__qualname__)
                 self.callees[f] = temp_callees
             # self.graph[f] = [self.graph[f], callee]
             # self.graph[f] = [x for x in self.graph[f]]
