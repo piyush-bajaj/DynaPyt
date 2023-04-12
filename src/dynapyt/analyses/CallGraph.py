@@ -56,9 +56,13 @@ class CallGraph(BaseAnalysis):
                 self.callers[f] = [dyn_ast]
             else:
                 self.callers[f] = [cst.Module([caller]).code]
-            if hasattr(function, "__code__") : 
+                
+            logging.info(hasattr(function, "__code__"))
+            if hasattr(function, "__code__"):
+                logging.info("func code")
                 self.callees[f] = [function.__code__]
             else:
+                logging.info("func qualname")
                 self.callees[f] = [function.__qualname__]
         # callee = get_node_by_location(ast, iids.iid_to_location[iid], m.Call())
         # if caller is None:
