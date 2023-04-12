@@ -19,6 +19,7 @@ class CallGraph(BaseAnalysis):
         callee = function.__qualname__
         
         key = dyn_ast.replace('.py.orig', '').replace('/','.')
+        format = "file"
         
         if caller is None:
             f = 'root module'
@@ -27,8 +28,10 @@ class CallGraph(BaseAnalysis):
             caller_parent = get_parent_by_type(ast, iids.iid_to_location[iid], m.ClassDef())
             if caller_parent is None:
                 f = key + '.' + caller.name.value
+                format += ".func"
             else:
                 f = key + '.' + caller_parent.name.value + '.' + caller.name.value
+                format += ".class.func"
         if f in self.graph.keys():
             temp = self.graph[f]
             if callee not in temp:
@@ -39,7 +42,7 @@ class CallGraph(BaseAnalysis):
             # self.graph[f] = self.graph[f].append(callee)
             
         else:
-            self.graph[f] = [callee]
+            self.graph[f] = [format, callee]
         # callee = get_node_by_location(ast, iids.iid_to_location[iid], m.Call())
         # if caller is None:
         #     f = 'root module'
