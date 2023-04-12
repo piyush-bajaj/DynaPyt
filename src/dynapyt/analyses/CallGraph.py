@@ -11,6 +11,8 @@ class CallGraph(BaseAnalysis):
         super(CallGraph, self).__init__()
         logging.basicConfig(filename="temp.log", format='%(message)s', level=logging.INFO)
         self.graph = {}
+        self.callers = {}
+        self.callees = {}
 
     def pre_call(self, dyn_ast: str, iid: int, function: Callable, pos_args: Tuple, kw_args: Dict):
         ast, iids = self._get_ast(dyn_ast)
@@ -37,12 +39,18 @@ class CallGraph(BaseAnalysis):
             if callee not in temp:
                 temp.append(callee)
                 self.graph[f] = temp
+                #add callee code
+                temp_callees = self.callees[f]
+                temp_callees.append(function.__code__)
+                self.callees[f] = temp_callees
             # self.graph[f] = [self.graph[f], callee]
             # self.graph[f] = [x for x in self.graph[f]]
             # self.graph[f] = self.graph[f].append(callee)
             
         else:
             self.graph[f] = [format, callee]
+            self.callers[f] = [cst.Module([caller]).code]
+            self.callees[f] = [function.__code__]
         # callee = get_node_by_location(ast, iids.iid_to_location[iid], m.Call())
         # if caller is None:
         #     f = 'root module'
@@ -75,7 +83,12 @@ class CallGraph(BaseAnalysis):
     
     def end_execution(self):
         # logging.info("Final graph")
-        logging.info(json.dumps(self.graph))
+        final_json = {
+            "Call_Graph" : self.graph,
+            "Caller" : self.callers,
+            "Callee" : self.callees
+        }
+        logging.info(json.dumps(self.final_json))
         # for key, value in self.graph.items():
         #     logging.info("{} : {}".format(key, value))
         # logging.info(self.graph)
