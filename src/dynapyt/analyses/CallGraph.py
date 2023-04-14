@@ -11,104 +11,44 @@ class CallGraph(BaseAnalysis):
         super(CallGraph, self).__init__()
         logging.basicConfig(filename="temp.json", format='%(message)s', level=logging.INFO)
         self.graph = {}
-        self.callers = {}
-        self.callees = {}
 
+    '''
+    DynaPyt hook for pre function call
+    '''
     def pre_call(self, dyn_ast: str, iid: int, function: Callable, pos_args: Tuple, kw_args: Dict):
         ast, iids = self._get_ast(dyn_ast)
         
+        # calling function 
         caller = get_parent_by_type(ast, iids.iid_to_location[iid], m.FunctionDef())
+        # called function 
         callee = function.__qualname__
         
+        #file name
         key = dyn_ast.replace('.py.orig', '').replace('/','.')
-        format = "file"
+        # format = "file"
         
         if caller is None:
-            f = 'root module'
             f = key
         else:
+            # if caller is a part of class, find the class name
             caller_parent = get_parent_by_type(ast, iids.iid_to_location[iid], m.ClassDef())
             if caller_parent is None:
                 f = key + '.' + caller.name.value
-                format += ".func"
+                # format += ".func"
             else:
                 f = key + '.' + caller_parent.name.value + '.' + caller.name.value
-                format += ".class.func"
+                # format += ".class.func"
+
+        # if caller already added
         if f in self.graph.keys():
             temp = self.graph[f]
+            # filter dupilcate callees
             if callee not in temp:
                 temp.append(callee)
                 self.graph[f] = temp
-                #add callee code
-                temp_callees = self.callees[f]
-                if hasattr(function, "__code__") :
-                    code = function.__code__
-                    temp_callees.append(code)
-                else:
-                    temp_callees.append(callee)
-                self.callees[f] = temp_callees
-            # self.graph[f] = [self.graph[f], callee]
-            # self.graph[f] = [x for x in self.graph[f]]
-            # self.graph[f] = self.graph[f].append(callee)
-            
         else:
-            self.graph[f] = [format, callee]
-            if caller is None:
-                self.callers[f] = [dyn_ast]
-            else:
-                self.callers[f] = [cst.Module([caller]).code]
-                
-            # logging.info(hasattr(function, "__code__"))
-            if hasattr(function, "__code__"):
-                # logging.info("func code")
-                code = function.__code__
-                self.callees[f] = [code]
-            else:
-                # logging.info("func qualname")
-                self.callees[f] = [callee]
-        # callee = get_node_by_location(ast, iids.iid_to_location[iid], m.Call())
-        # if caller is None:
-        #     f = 'root module'
-        # else:
-        #     f = caller.name.value
-        # if callee is None:
-        #     t = 'unknown'
-        # else:
-        #     t = callee.func.value
-        # if f in self.graph.keys():
-        #     self.graph[f] = [self.graph[f], t]
-        # else:
-        #     self.graph[f] = [t]
-        # logging.info(function.__name__)
-        # logging.info('Added to graph')
-        # logging.info('Caller : {}\nTarget : {}'.format(f,t))
-        # if dyn_ast == "/home/piyush/Documents/MT/CallGraph/flask-api/flask_api/tests/test_app.py.orig":
-        #     logging.info("File : {}".format(dyn_ast))
-        #     logging.info("Function Qname : {}".format(function.__qualname__))
-        #     if hasattr(function, "__module__"):
-        #         logging.info("Function Module: {}".format(function.__module__))
-
-    # def end_execution(self):
-    #     logging.info("Final graph")
-    #     for element in self.graph:
-    #         func_name = element[0]
-    #         val = cst.Module([element[1]]).code
-    #         logging.info("func_name", func_name)
-    #         logging.info("val", val)
+            # self.graph[f] = [format, callee]
+            self.graph[f] = [callee]
     
     def end_execution(self):
-        # logging.info("Final graph")
-        final_json = {
-            "Call_Graph" : self.graph,
-            "Caller" : self.callers
-        }
-        # logging.info("graph")
-        # logging.info(json.dumps(self.graph))
-        # logging.info("callers")
-        # logging.info(json.dumps(self.callers))
-        # logging.info("callees")
-        # logging.info(json.dumps(self.callees))
-        logging.info(json.dumps(final_json))
-        # for key, value in self.graph.items():
-        #     logging.info("{} : {}".format(key, value))
-        # logging.info(self.graph)
+        logging.info(json.dumps(self.graph))
