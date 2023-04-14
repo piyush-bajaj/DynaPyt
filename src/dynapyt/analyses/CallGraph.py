@@ -9,7 +9,7 @@ import json
 class CallGraph(BaseAnalysis):
     def __init__(self):
         super(CallGraph, self).__init__()
-        logging.basicConfig(filename="temp.log", format='%(message)s', level=logging.INFO)
+        logging.basicConfig(filename="temp.json", format='%(message)s', level=logging.INFO)
         self.graph = {}
         self.callers = {}
         self.callees = {}
