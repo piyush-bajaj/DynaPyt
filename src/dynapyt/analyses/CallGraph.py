@@ -100,15 +100,15 @@ class CallGraph(BaseAnalysis):
         # logging.info("Final graph")
         final_json = {
             "Call_Graph" : self.graph,
-            "Caller" : self.callers,
-            "Callee" : self.callees
+            "Caller" : self.callers
         }
-        logging.info("graph")
-        logging.info(json.dumps(self.graph))
-        logging.info("callers")
-        logging.info(json.dumps(self.callers))
-        logging.info("callees")
-        logging.info(json.dumps(self.callees))
+        # logging.info("graph")
+        # logging.info(json.dumps(self.graph))
+        # logging.info("callers")
+        # logging.info(json.dumps(self.callers))
+        # logging.info("callees")
+        # logging.info(json.dumps(self.callees))
+        logging.info(json.dumps(final_json))
         # for key, value in self.graph.items():
         #     logging.info("{} : {}".format(key, value))
         # logging.info(self.graph)
