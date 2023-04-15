@@ -26,7 +26,7 @@ class CallGraph(BaseAnalysis):
         else:
             temp = str(function)
             if temp.__contains__("MarkDecorator(mark=Mark(name='skip', args=(), kwargs={}))"):
-                pass
+                callee = "pytest.mark.skip"
         
         #file name
         key = dyn_ast.replace('.py.orig', '').replace('/','.')
