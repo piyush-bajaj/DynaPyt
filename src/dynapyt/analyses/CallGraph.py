@@ -21,12 +21,12 @@ class CallGraph(BaseAnalysis):
         # calling function 
         caller = get_parent_by_type(ast, iids.iid_to_location[iid], m.FunctionDef())
         # called function
-        val = str(function)
-        logging.info(val.__contains__("MarkDecorator(mark=Mark(name='skip', args=(), kwargs={}))"))
         if hasattr(function, "__qualname__"):
             callee = function.__qualname__
         else:
-            callee = function.__name__
+            temp = str(function)
+            if temp.__contains__("MarkDecorator(mark=Mark(name='skip', args=(), kwargs={}))"):
+                pass
         
         #file name
         key = dyn_ast.replace('.py.orig', '').replace('/','.')
