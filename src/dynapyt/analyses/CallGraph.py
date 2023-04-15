@@ -20,8 +20,11 @@ class CallGraph(BaseAnalysis):
         
         # calling function 
         caller = get_parent_by_type(ast, iids.iid_to_location[iid], m.FunctionDef())
-        # called function 
-        callee = function.__qualname__
+        # called function
+        if hasattr(function, "__qualname__"):
+            callee = function.__qualname__
+        else:
+            callee = function.__name__
         
         #file name
         key = dyn_ast.replace('.py.orig', '').replace('/','.')
