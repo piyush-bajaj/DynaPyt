@@ -21,8 +21,7 @@ class CallGraph(BaseAnalysis):
         # calling function 
         caller = get_parent_by_type(ast, iids.iid_to_location[iid], m.FunctionDef())
         # called function
-        if hasattr(function, "__annotation__"):
-            logging.info(function.__annotations__)
+        logging.info(type(function))
         if hasattr(function, "__qualname__"):
             callee = function.__qualname__
         else:
