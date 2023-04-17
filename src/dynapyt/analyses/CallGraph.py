@@ -25,6 +25,7 @@ class CallGraph(BaseAnalysis):
             callee = function.__qualname__
         else:
             temp = str(function)
+            callee = temp
             # if temp.__contains__("MarkDecorator(mark=Mark(name='skip', args=(), kwargs={}))"):
             if temp.__contains__("MarkDecorator"):
                 callee = "MarkDecorator"
