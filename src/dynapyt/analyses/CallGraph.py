@@ -64,8 +64,8 @@ class CallGraph(BaseAnalysis):
             logging.info("{")
             for idx, key in enumerate(self.graph):                
                 if not idx == (len(self.graph.keys()) - 1):
-                    logging.info("%s : %s, ".format(key, self.graph[key]))
+                    logging.info("{} : {}, ".format(key, self.graph[key]))
                 else:
-                    logging.info("%s : %s".format(key, self.graph[key]))
+                    logging.info("{} : {}".format(key, self.graph[key]))
             logging.info("}")
                 
