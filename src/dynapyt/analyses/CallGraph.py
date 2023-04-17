@@ -27,8 +27,8 @@ class CallGraph(BaseAnalysis):
             temp = str(function)
             callee = temp
             # if temp.__contains__("MarkDecorator(mark=Mark(name='skip', args=(), kwargs={}))"):
-            if temp.__contains__("MarkDecorator"):
-                callee = "MarkDecorator"
+            # if temp.__contains__("MarkDecorator"):
+            #     callee = "MarkDecorator"
         
         #file name
         key = dyn_ast.replace('.py.orig', '').replace('/','.')
