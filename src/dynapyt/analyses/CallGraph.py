@@ -58,4 +58,14 @@ class CallGraph(BaseAnalysis):
             self.graph[f] = [callee]
     
     def end_execution(self):
-        logging.info(json.dumps(self.graph))
+        try:
+            logging.info(json.dumps(self.graph))
+        except Exception:
+            logging.info("{")
+            for idx, key in enumerate(self.graph):                
+                if not idx == (len(self.graph.keys()) - 1):
+                    logging.info("%s : %s, ".format(key, self.graph[key]))
+                else:
+                    logging.info("%s : %s".format(key, self.graph[key]))
+            logging.info("}")
+                
