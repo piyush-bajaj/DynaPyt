@@ -18,7 +18,6 @@ class CallGraph(BaseAnalysis):
     '''
     def pre_call(self, dyn_ast: str, iid: int, function: Callable, pos_args: Tuple, kw_args: Dict):
         ast, iids = self._get_ast(dyn_ast)
-        # logging.info(str(getmodule(function)).split(' ')[1] if getmodule(function) is not None else 'abc')
         module = getmodule(function)
         module = str(module).split(' ')[1] if module is not None else "''"
         # calling function 
