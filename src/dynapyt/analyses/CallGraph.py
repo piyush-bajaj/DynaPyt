@@ -18,14 +18,14 @@ class CallGraph(BaseAnalysis):
     '''
     def pre_call(self, dyn_ast: str, iid: int, function: Callable, pos_args: Tuple, kw_args: Dict):
         ast, iids = self._get_ast(dyn_ast)
-        # module = getmodule(function)
-        # module = str(module).split(' ')[1] if module is not None else "''"
+        module = getmodule(function)
+        module = str(module).split(' ')[1] if module is not None else "''"
         # calling function 
         caller = get_parent_by_type(ast, iids.iid_to_location[iid], m.FunctionDef())
         # called function
         if hasattr(function, "__qualname__"):
-            # callee = module[1:-1] + '.' + function.__qualname__ if module != "''" else function.__qualname__
-            callee = function.__qualname__
+            callee = module[1:-1] + '.' + function.__qualname__ if module != "''" else function.__qualname__
+            # callee = function.__qualname__
         else:
             temp = str(function)
             callee = temp
@@ -67,8 +67,8 @@ class CallGraph(BaseAnalysis):
             logging.info("{")
             for idx, key in enumerate(self.graph):                
                 if not idx == (len(self.graph.keys()) - 1):
-                    logging.info("{} : {}, ".format(key, self.graph[key]))
+                    logging.info("\"{}\" : {}, ".format(key, json.dumps(self.graph[key])))
                 else:
-                    logging.info("{} : {}".format(key, self.graph[key]))
+                    logging.info("\"{}\" : {}".format(key, json.dumps(self.graph[key])))
             logging.info("}")
                 
