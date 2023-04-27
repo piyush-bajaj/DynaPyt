@@ -76,8 +76,7 @@ class CallGraph(BaseAnalysis):
         except Exception:
             logging.info("{")
             for idx, key in enumerate(self.graph):
-                #values = ["\"{}\"".format(x) for x in self.graph[key]]
-                values = "[" + "\"{}\"".format(', '.join(self.graph[key])) + "]"
+                values = ["\"{}\"".format(x) for x in self.graph[key]]
                 if not idx == (len(self.graph.keys()) - 1):
                     logging.info("\"{}\" : {}, ".format(key, values))
                 else:
