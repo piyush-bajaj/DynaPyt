@@ -3,7 +3,7 @@ import logging
 import libcst as cst
 import libcst.matchers as m
 from .BaseAnalysis import BaseAnalysis
-from ..utils.nodeLocator import get_node_by_location, get_parent_by_type
+from ..utils.nodeLocator import get_parent_by_type
 import json
 from inspect import getmodule
 
@@ -24,14 +24,18 @@ class CallGraph(BaseAnalysis):
         caller = get_parent_by_type(ast, iids.iid_to_location[iid], m.FunctionDef())
         # called function
         if hasattr(function, "__qualname__"):
+            '''
+            module of the callee is added through the module if present
+            '''
             callee = module[1:-1] + '.' + function.__qualname__ if module != "''" else function.__qualname__
-            # callee = function.__qualname__
         else:
+            '''
+            this is done to capture functions whose function.__qualname__ is not defined,
+            but the string gives an idea as to which function is called.
+            Captures MarkDecorator annotations, lambdas object calls, etc 
+            '''
             temp = str(function)
             callee = temp
-            # if temp.__contains__("MarkDecorator(mark=Mark(name='skip', args=(), kwargs={}))"):
-            # if temp.__contains__("MarkDecorator"):
-            #     callee = "MarkDecorator"
         
         #file name
         key = dyn_ast.replace('.py.orig', '').replace('/','.')
@@ -60,14 +64,19 @@ class CallGraph(BaseAnalysis):
             # self.graph[f] = [format, callee]
             self.graph[f] = [callee]
     
+    '''
+    DynaPyt hook for end of execution
+    '''
     def end_execution(self):
+        '''
+        to avoid serialization failures in converting dict to json
+        '''
         try:
             logging.info(json.dumps(self.graph))
         except Exception:
             logging.info("{")
             for idx, key in enumerate(self.graph):
                 values = ["\"{}\"".format(x) for x in self.graph[key]]
-                # values = "[" + "\"{}\"".format(', '.join(self.graph[key])) + "]"
                 if not idx == (len(self.graph.keys()) - 1):
                     logging.info("\"{}\" : {}, ".format(key, values))
                 else:
